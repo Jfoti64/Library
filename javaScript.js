@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         createNewCard(newBook.title, newBook.author, newBook.pages);
     }
 
-    // Create and add new card to html
+    // Create and add the new card to the html
     function createNewCard(title, author, pages) {
         const bookCardDiv = document.createElement("div");
         bookCardDiv.classList.add("bookCard");
@@ -63,12 +63,12 @@ document.addEventListener('DOMContentLoaded', function() {
         bookCardDiv.appendChild(pagesDiv);
 
         const pagesP1 = document.createElement("p");
-        pagesP1.textContent = "Lenghth: ";
+        pagesP1.textContent = "Length: " + pages + ", read or unread";
         pagesDiv.appendChild(pagesP1);
     
-        const pagesP2 = document.createElement("p");
-        pagesP2.textContent = pages;
-        pagesDiv.appendChild(pagesP2);
+        //const pagesP2 = document.createElement("p");
+        //pagesP2.textContent = pages;
+        //pagesDiv.appendChild(pagesP2);
 
         const cardBtn1 = document.createElement("button");
         cardBtn1.textContent = "Remove";
@@ -97,8 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let bookPages = obj.pages;
         createNewCard(bookTitle, bookAuthor, bookPages);
     });
-
-
 
 
     // When form submitted
