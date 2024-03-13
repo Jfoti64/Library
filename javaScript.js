@@ -16,18 +16,17 @@ document.addEventListener('DOMContentLoaded', function() {
         },
     ];
 
-    function book() {
-    // the constructor...
-        
+    function book(title, author, pages) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+
+        addBookToLibrary(this);
     }
 
-    function addBookToLibrary() {
-        myLibrary.forEach(obj => {
-            let bookTitle = obj.title;
-            let bookAuthor = obj.author;
-            let bookPages = obj.pages;
-            createNewCard(bookTitle, bookAuthor, bookPages);
-        });
+    function addBookToLibrary(arrObject) {
+        myLibrary.push(arrObject);
+        createNewCard(arrObject.title, arrObject.author, arrObject.pages);
     }
 
     // Create and add new card to html
@@ -68,11 +67,11 @@ document.addEventListener('DOMContentLoaded', function() {
         pagesDiv.appendChild(pagesP2);
 
         const cardBtn1 = document.createElement("button");
-        cardBtn1.textContent = "Click";
+        cardBtn1.textContent = "Remove";
         bookCardDiv.appendChild(cardBtn1);
 
         const cardBtn2 = document.createElement("button");
-        cardBtn2.textContent = "Click";
+        cardBtn2.textContent = "Read";
         bookCardDiv.appendChild(cardBtn2);
         
 
@@ -87,8 +86,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const cards = document.getElementById('cards');
 
 
-    // Temp test
-    addBookToLibrary();
+    // Add all books from array to a card
+    myLibrary.forEach(obj => {
+        let bookTitle = obj.title;
+        let bookAuthor = obj.author;
+        let bookPages = obj.pages;
+        createNewCard(bookTitle, bookAuthor, bookPages);
+    });
+
+
+
 
     // When form submitted
     document.getElementById("myForm").addEventListener("submit", function(event) {
@@ -96,6 +103,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Get the value of the checked radio button
         let selectedReadOrNot = document.querySelector('input[name="readOrNot"]:checked');
+
+
+        //Testing
+        const myBook = new book("testing", "test", 150);
+        console.log(myLibrary);
       
         if(selectedReadOrNot) {
           alert("Read Status: " + selectedReadOrNot.value);
