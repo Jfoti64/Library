@@ -3,7 +3,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
 
 
-    const myLibrary = [];
+    const myLibrary = [
+        {
+            title: 'Cosmos',
+            author: 'Carl Sagan',
+            pages: '384',
+        },
+        {
+            title: "The Devil's Candy",
+            author: 'Julie Salamon',
+            pages: '448',
+        },
+    ];
 
     function Book() {
     // the constructor...

@@ -24,3 +24,17 @@
     width: auto;
     background: red;
   }
+
+  #card1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
+
+  .cards .title, .author, .pages {
+    grid-column: 1 / 4;
+  }
+
+  .editBtns {
+    
+  }
