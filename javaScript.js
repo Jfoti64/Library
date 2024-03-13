@@ -20,13 +20,17 @@ document.addEventListener('DOMContentLoaded', function() {
         this.title = title;
         this.author = author;
         this.pages = pages;
-
-        addBookToLibrary(this);
     }
 
-    function addBookToLibrary(arrObject) {
-        myLibrary.push(arrObject);
-        createNewCard(arrObject.title, arrObject.author, arrObject.pages);
+    function addBookToLibrary() {
+        let bookTitle = titleInput.value;
+        let bookAuthor = authorInput.value;
+        let bookPages = pagesInput.value;
+
+        const newBook = new book(bookTitle, bookAuthor, bookPages);
+
+        myLibrary.push(newBook);
+        createNewCard(newBook.title, newBook.author, newBook.pages);
     }
 
     // Create and add new card to html
@@ -79,14 +83,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-    const addBook = document.getElementById('addBook');
-    const title = document.getElementById('title');
-    const author = document.getElementById('author');
-    const pages = document.getElementById('pages');
+    const addBookBtn = document.getElementById('addBook');
+    const titleInput = document.getElementById('title');
+    const authorInput = document.getElementById('author');
+    const pagesInput = document.getElementById('pages');
     const cards = document.getElementById('cards');
 
 
-    // Add all books from array to a card
+    // Add all books already in array to a card
     myLibrary.forEach(obj => {
         let bookTitle = obj.title;
         let bookAuthor = obj.author;
@@ -105,14 +109,17 @@ document.addEventListener('DOMContentLoaded', function() {
         let selectedReadOrNot = document.querySelector('input[name="readOrNot"]:checked');
 
 
-        //Testing
-        const myBook = new book("testing", "test", 150);
-        console.log(myLibrary);
+        
       
         if(selectedReadOrNot) {
-          alert("Read Status: " + selectedReadOrNot.value);
+            alert("Read Status: " + selectedReadOrNot.value);
+            
+            addBookToLibrary();
+
+            //Testing
+            console.log(myLibrary);
         } else {
-          alert("Please select if read or unread.");
+            alert("Please select if read or unread.");
         }
       });
 
