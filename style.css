@@ -1,14 +1,14 @@
 .container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(2, 1fr) 10fr;
+    grid-template-rows: repeat(2, 1fr) 10fr 1fr;
   }
   
   .header {
     background-color: lightgray;
   }
   
-  .addBooksRow {
+  #addBooksRow {
     background-color: aliceblue;
   }
   

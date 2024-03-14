@@ -93,7 +93,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const titleInput = document.getElementById('title');
     const authorInput = document.getElementById('author');
     const pagesInput = document.getElementById('pages');
+    const addBooksRow = document.getElementById('addBooksRow');
     const cards = document.getElementById('cards');
+    const showAddBookForm = document.getElementById('showAddBookForm');
 
 
     // Add all books already in array to a card
@@ -103,6 +105,15 @@ document.addEventListener('DOMContentLoaded', function() {
         let bookPages = obj.pages;
         let readOrNot = obj.readOrNot
         createNewCard(bookTitle, bookAuthor, bookPages, readOrNot);
+    });
+
+    // Show or hide addBooksForm when btn clicked
+    showAddBookForm.addEventListener('click', () => {
+        if (addBooksRow.style.display === "none") {
+            addBooksRow.style.display = "block";
+          } else {
+            addBooksRow.style.display = "none";
+          }
     });
 
 
