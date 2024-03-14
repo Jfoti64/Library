@@ -48,10 +48,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Delete book from card and array
-    function removeBook(dataIndex, bookCardDivToRemove) {
-        bookCardDivToRemove.remove();
+    function removeBook(dataIndex) {
+        // Delete all cards
+        const bookCards = document.querySelectorAll('.bookCard');
+        bookCards.forEach(card => card.remove());
         myLibrary.splice(dataIndex, 1);
         updateBooksIndex();
+        upDateCardsFromArray();
     }
 
     // Add an event listener to each removeBtn as it is created
@@ -61,7 +64,23 @@ document.addEventListener('DOMContentLoaded', function() {
             const bookCardDivToRemove = clickedRemoveBtn.closest('.bookCard');
             const dataIndex = bookCardDivToRemove.getAttribute('data-index');
 
-            removeBook(dataIndex, bookCardDivToRemove);
+            removeBook(dataIndex);
+        });
+    }
+
+    // Add all books already in array to a card
+    function upDateCardsFromArray() {
+        myLibrary.forEach(obj => {
+        
+            updateBooksIndex();
+    
+            let bookTitle = obj.title;
+            let bookAuthor = obj.author;
+            let bookPages = obj.pages;
+            let readOrNot = obj.readOrNot;
+            let index = obj.index;
+    
+            createNewCard(bookTitle, bookAuthor, bookPages, readOrNot, index);
         });
     }
 
@@ -123,26 +142,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const addBooksRow = document.getElementById('addBooksRow');
     const cards = document.getElementById('cards');
     const showAddBookForm = document.getElementById('showAddBookForm');
-    const removeBtn = document.getElementsByClassName('removeBtn');
 
 
-    // Add all books already in array to a card
-    myLibrary.forEach(obj => {
-        
-        updateBooksIndex();
-
-        let bookTitle = obj.title;
-        let bookAuthor = obj.author;
-        let bookPages = obj.pages;
-        let readOrNot = obj.readOrNot;
-        let index = obj.index;
-
-        createNewCard(bookTitle, bookAuthor, bookPages, readOrNot, index);
-
-    });
+    upDateCardsFromArray();
 
     // Show or hide addBooksForm when btn clicked
     showAddBookForm.addEventListener('click', () => {
+        //Testing
+        console.log(myLibrary);
         if (addBooksRow.style.display === "none") {
             addBooksRow.style.display = "block";
           } else {
@@ -159,8 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
           
         addNewBookToLibrary();
 
-        //Testing
-        console.log(myLibrary);
+        
     });
 
 });
