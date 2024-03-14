@@ -8,11 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'Cosmos',
             author: 'Carl Sagan',
             pages: '384',
+            readOrNot: 'Read',
         },
         {
             title: "The Devil's Candy",
             author: 'Julie Salamon',
             pages: '448',
+            readOrNot: 'Read',
         },
     ];
 
@@ -23,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.readOrNot = readOrNot;
     }
 
-    function addBookToLibrary() {
+    function addNewBookToLibrary() {
         let bookTitle = titleInput.value;
         let bookAuthor = authorInput.value;
         let bookPages = pagesInput.value;
@@ -35,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         myLibrary.push(newBook);
         createNewCard(newBook.title, newBook.author, newBook.pages, newBook.readOrNot);
     }
+
 
     // Create and add the new card to the html
     function createNewCard(title, author, pages, readOrNot) {
@@ -98,7 +101,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let bookTitle = obj.title;
         let bookAuthor = obj.author;
         let bookPages = obj.pages;
-        createNewCard(bookTitle, bookAuthor, bookPages);
+        let readOrNot = obj.readOrNot
+        createNewCard(bookTitle, bookAuthor, bookPages, readOrNot);
     });
 
 
@@ -106,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("myForm").addEventListener("submit", function(event) {
         event.preventDefault(); // Prevent the default form submission
           
-        addBookToLibrary();
+        addNewBookToLibrary();
 
         //Testing
         console.log(myLibrary);
