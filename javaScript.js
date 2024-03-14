@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    
-
+    const addBookBtn = document.getElementById('addBook');
+    const titleInput = document.getElementById('title');
+    const authorInput = document.getElementById('author');
+    const pagesInput = document.getElementById('pages');
+    const addBooksRow = document.getElementById('addBooksRow');
+    const cards = document.getElementById('cards');
+    const showAddBookForm = document.getElementById('showAddBookForm');
 
     const myLibrary = [
         {
@@ -52,8 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Delete all cards
         const bookCards = document.querySelectorAll('.bookCard');
         bookCards.forEach(card => card.remove());
+
         myLibrary.splice(dataIndex, 1);
-        updateBooksIndex();
         upDateCardsFromArray();
     }
 
@@ -68,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Add all books already in array to a card
+    // Add all books in array to their own card
     function upDateCardsFromArray() {
         myLibrary.forEach(obj => {
         
@@ -83,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
             createNewCard(bookTitle, bookAuthor, bookPages, readOrNot, index);
         });
     }
-
 
     // Create and add the new card to the html
     function createNewCard(title, author, pages, readOrNot, index) {
@@ -135,15 +139,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-    const addBookBtn = document.getElementById('addBook');
-    const titleInput = document.getElementById('title');
-    const authorInput = document.getElementById('author');
-    const pagesInput = document.getElementById('pages');
-    const addBooksRow = document.getElementById('addBooksRow');
-    const cards = document.getElementById('cards');
-    const showAddBookForm = document.getElementById('showAddBookForm');
-
-
     upDateCardsFromArray();
 
     // Show or hide addBooksForm when btn clicked
@@ -157,16 +152,11 @@ document.addEventListener('DOMContentLoaded', function() {
           }
     });
 
-    //Testing
-    console.log(myLibrary);
-
     // When form submitted
     document.getElementById("myForm").addEventListener("submit", function(event) {
         event.preventDefault(); // Prevent the default form submission
           
         addNewBookToLibrary();
-
-        
     });
 
 });
