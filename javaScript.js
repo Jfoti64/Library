@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
         this.author = author;
         this.pages = pages;
         this.readOrNot = readOrNot;
-        this.index = myLibrary.length;
     }
 
     function addNewBookToLibrary() {
@@ -38,7 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const newBook = new book(bookTitle, bookAuthor, bookPages, bookReadOrNot);
 
         myLibrary.push(newBook);
-        createNewCard(newBook.title, newBook.author, newBook.pages, newBook.readOrNot);
+        updateBooksIndex();
+
+        createNewCard(newBook.title, newBook.author, newBook.pages, newBook.readOrNot, newBook.index);
     }
 
     // Update the index property for the all books in array
@@ -50,9 +51,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // Create and add the new card to the html
-    function createNewCard(title, author, pages, readOrNot) {
+    function createNewCard(title, author, pages, readOrNot, index) {
         const bookCardDiv = document.createElement("div");
         bookCardDiv.classList.add("bookCard");
+        bookCardDiv.setAttribute("data-index", index);
 
         const titleDiv = document.createElement("div");
         titleDiv.classList.add("title");
@@ -116,7 +118,9 @@ document.addEventListener('DOMContentLoaded', function() {
         let bookAuthor = obj.author;
         let bookPages = obj.pages;
         let readOrNot = obj.readOrNot
+        updateBooksIndex();
         createNewCard(bookTitle, bookAuthor, bookPages, readOrNot);
+
     });
 
     // Show or hide addBooksForm when btn clicked
@@ -138,12 +142,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }  
 
 
+    //Testing
+    console.log(myLibrary);
+
     // When form submitted
     document.getElementById("myForm").addEventListener("submit", function(event) {
         event.preventDefault(); // Prevent the default form submission
           
         addNewBookToLibrary();
-        updateBooksIndex();
 
         //Testing
         console.log(myLibrary);
