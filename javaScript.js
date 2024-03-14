@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const cardBtn1 = document.createElement("button");
         cardBtn1.textContent = "Remove";
+        cardBtn1.classList.add("removeBtn");
         bookCardDiv.appendChild(cardBtn1);
 
         const cardBtn2 = document.createElement("button");
@@ -96,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const addBooksRow = document.getElementById('addBooksRow');
     const cards = document.getElementById('cards');
     const showAddBookForm = document.getElementById('showAddBookForm');
+    const removeBtns = document.getElementsByClassName('removeBtn');
 
 
     // Add all books already in array to a card
@@ -115,6 +117,15 @@ document.addEventListener('DOMContentLoaded', function() {
             addBooksRow.style.display = "none";
           }
     });
+
+    // Loop through all remove buttons and attach event listener to each
+    for (let i = 0; i < removeBtns.length; i++) {
+            removeBtns[i].addEventListener('click', () => {
+            
+            // Logic to remove when btn clicked
+            
+        });
+    }  
 
 
     // When form submitted
