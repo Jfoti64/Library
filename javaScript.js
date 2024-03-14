@@ -9,14 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
             author: 'Carl Sagan',
             pages: '384',
             readOrNot: 'Read',
-            index: 0,
         },
         {
             title: "The Devil's Candy",
             author: 'Julie Salamon',
             pages: '448',
             readOrNot: 'Read',
-            index: 0,
         },
     ];
 
@@ -47,6 +45,11 @@ document.addEventListener('DOMContentLoaded', function() {
         myLibrary.forEach((book, idx) => {
             book.index = idx;
         });
+    }
+
+    // Delete book from card and array
+    function removeBook() {
+
     }
 
 
@@ -84,10 +87,6 @@ document.addEventListener('DOMContentLoaded', function() {
         pagesP1.textContent = "Length: " + pages + ", " + (readOrNot == "Read" ? "Read" : "Unread");
         pagesDiv.appendChild(pagesP1);
     
-        //const pagesP2 = document.createElement("p");
-        //pagesP2.textContent = pages;
-        //pagesDiv.appendChild(pagesP2);
-
         const cardBtn1 = document.createElement("button");
         cardBtn1.textContent = "Remove";
         cardBtn1.classList.add("removeBtn");
@@ -114,12 +113,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add all books already in array to a card
     myLibrary.forEach(obj => {
+        
+        updateBooksIndex();
+
         let bookTitle = obj.title;
         let bookAuthor = obj.author;
         let bookPages = obj.pages;
-        let readOrNot = obj.readOrNot
-        updateBooksIndex();
-        createNewCard(bookTitle, bookAuthor, bookPages, readOrNot);
+        let readOrNot = obj.readOrNot;
+        let index = obj.index;
+
+        createNewCard(bookTitle, bookAuthor, bookPages, readOrNot, index);
 
     });
 
@@ -137,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
             removeBtns[i].addEventListener('click', () => {
             
             // Logic to remove when btn clicked
-            
+            removeBook();
         });
     }  
 
