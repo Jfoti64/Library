@@ -16,25 +16,28 @@ document.addEventListener('DOMContentLoaded', function() {
         },
     ];
 
-    function book(title, author, pages) {
+    function book(title, author, pages, readOrNot) {
         this.title = title;
         this.author = author;
         this.pages = pages;
+        this.readOrNot = readOrNot;
     }
 
     function addBookToLibrary() {
         let bookTitle = titleInput.value;
         let bookAuthor = authorInput.value;
         let bookPages = pagesInput.value;
+        // Get the value of the checked radio button
+        let bookReadOrNot = document.querySelector('input[name="readOrNot"]:checked');
 
-        const newBook = new book(bookTitle, bookAuthor, bookPages);
+        const newBook = new book(bookTitle, bookAuthor, bookPages, bookReadOrNot);
 
         myLibrary.push(newBook);
-        createNewCard(newBook.title, newBook.author, newBook.pages);
+        createNewCard(newBook.title, newBook.author, newBook.pages, newBook.readOrNot);
     }
 
     // Create and add the new card to the html
-    function createNewCard(title, author, pages) {
+    function createNewCard(title, author, pages, readOrNot) {
         const bookCardDiv = document.createElement("div");
         bookCardDiv.classList.add("bookCard");
 
@@ -63,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         bookCardDiv.appendChild(pagesDiv);
 
         const pagesP1 = document.createElement("p");
-        pagesP1.textContent = "Length: " + pages + ", read or unread";
+        pagesP1.textContent = "Length: " + pages + ", " + (readOrNot == "Read" ? "Read" : "Unread");
         pagesDiv.appendChild(pagesP1);
     
         //const pagesP2 = document.createElement("p");
@@ -102,23 +105,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // When form submitted
     document.getElementById("myForm").addEventListener("submit", function(event) {
         event.preventDefault(); // Prevent the default form submission
-        
-        // Get the value of the checked radio button
-        let selectedReadOrNot = document.querySelector('input[name="readOrNot"]:checked');
+          
+        addBookToLibrary();
 
-
-        
-      
-        if(selectedReadOrNot) {
-            alert("Read Status: " + selectedReadOrNot.value);
-            
-            addBookToLibrary();
-
-            //Testing
-            console.log(myLibrary);
-        } else {
-            alert("Please select if read or unread.");
-        }
-      });
+        //Testing
+        console.log(myLibrary);
+    });
 
 });
