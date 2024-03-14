@@ -48,8 +48,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Delete book from card and array
-    function removeBook() {
+    function removeBook(dataIndex, bookCardDivToRemove) {
+        bookCardDivToRemove.remove();
+        myLibrary.splice(dataIndex, 1);
+        updateBooksIndex();
+    }
 
+    // Add an event listener to each removeBtn as it is created
+    function addEventListenerBtn(removeBtn) {
+        removeBtn.addEventListener('click', () => {
+            const clickedRemoveBtn = event.target;
+            const bookCardDivToRemove = clickedRemoveBtn.closest('.bookCard');
+            const dataIndex = bookCardDivToRemove.getAttribute('data-index');
+
+            removeBook(dataIndex, bookCardDivToRemove);
+        });
     }
 
 
@@ -87,10 +100,12 @@ document.addEventListener('DOMContentLoaded', function() {
         pagesP1.textContent = "Length: " + pages + ", " + (readOrNot == "Read" ? "Read" : "Unread");
         pagesDiv.appendChild(pagesP1);
     
-        const cardBtn1 = document.createElement("button");
-        cardBtn1.textContent = "Remove";
-        cardBtn1.classList.add("removeBtn");
-        bookCardDiv.appendChild(cardBtn1);
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Remove";
+        removeBtn.classList.add("removeBtn");
+        bookCardDiv.appendChild(removeBtn);
+        addEventListenerBtn(removeBtn);
+        
 
         const cardBtn2 = document.createElement("button");
         cardBtn2.textContent = "Read";
@@ -108,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const addBooksRow = document.getElementById('addBooksRow');
     const cards = document.getElementById('cards');
     const showAddBookForm = document.getElementById('showAddBookForm');
-    const removeBtns = document.getElementsByClassName('removeBtn');
+    const removeBtn = document.getElementsByClassName('removeBtn');
 
 
     // Add all books already in array to a card
@@ -134,16 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
             addBooksRow.style.display = "none";
           }
     });
-
-    // Loop through all remove buttons and attach event listener to each
-    for (let i = 0; i < removeBtns.length; i++) {
-            removeBtns[i].addEventListener('click', () => {
-            
-            // Logic to remove when btn clicked
-            removeBook();
-        });
-    }  
-
 
     //Testing
     console.log(myLibrary);
