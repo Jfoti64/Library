@@ -9,12 +9,14 @@ document.addEventListener('DOMContentLoaded', function() {
             author: 'Carl Sagan',
             pages: '384',
             readOrNot: 'Read',
+            index: 0,
         },
         {
             title: "The Devil's Candy",
             author: 'Julie Salamon',
             pages: '448',
             readOrNot: 'Read',
+            index: 0,
         },
     ];
 
@@ -23,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.author = author;
         this.pages = pages;
         this.readOrNot = readOrNot;
+        this.index = myLibrary.length;
     }
 
     function addNewBookToLibrary() {
@@ -30,12 +33,19 @@ document.addEventListener('DOMContentLoaded', function() {
         let bookAuthor = authorInput.value;
         let bookPages = pagesInput.value;
         // Get the value of the checked radio button
-        let bookReadOrNot = document.querySelector('input[name="readOrNot"]:checked');
+        let bookReadOrNot = document.querySelector('input[name="readOrNot"]:checked').value;
 
         const newBook = new book(bookTitle, bookAuthor, bookPages, bookReadOrNot);
 
         myLibrary.push(newBook);
         createNewCard(newBook.title, newBook.author, newBook.pages, newBook.readOrNot);
+    }
+
+    // Update the index property for the all books in array
+    function updateBooksIndex() {
+        myLibrary.forEach((book, idx) => {
+            book.index = idx;
+        });
     }
 
 
@@ -133,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault(); // Prevent the default form submission
           
         addNewBookToLibrary();
+        updateBooksIndex();
 
         //Testing
         console.log(myLibrary);
