@@ -180,14 +180,9 @@ document.addEventListener('DOMContentLoaded', function() {
         cards.insertBefore(bookCardDiv, cards.lastChild);
     }
 
-
-    upDateCardsFromArray();
-
     // Show or hide addBooksForm when btn clicked
     showAddBookForm.addEventListener('click', () => {
-        //Testing
-        console.log(myLibrary);
-        if (addBooksRow.style.display === "none") {
+        if (addBooksRow.style.display === "none" || addBooksRow.style.display === "") {
             addBooksRow.style.display = "flex";
           } else {
             addBooksRow.style.display = "none";
@@ -200,5 +195,8 @@ document.addEventListener('DOMContentLoaded', function() {
           
         addNewBookToLibrary();
     });
+
+
+    upDateCardsFromArray();
 
 });
