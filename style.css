@@ -1,11 +1,12 @@
 .container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 150px 150px minmax(300px, 1fr) 50px;
+    grid-template-rows: 100px 150px minmax(300px, 1fr) 50px;
   }
   
-.header {
+#header {
     background-color: lightgray;
+    display: grid;
 }
   
 #addBooksRow {
@@ -59,5 +60,9 @@
     border-radius: 5px;
     width: 80px;
     height: 40px;
+    place-self: center;
+}
+
+#header h1 {
     place-self: center;
 }
