@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    const addBookBtn = document.getElementById('addBook');
     const titleInput = document.getElementById('title');
     const authorInput = document.getElementById('author');
     const pagesInput = document.getElementById('pages');
