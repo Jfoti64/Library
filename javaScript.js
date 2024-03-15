@@ -176,14 +176,14 @@ document.addEventListener('DOMContentLoaded', function() {
         //Testing
         console.log(myLibrary);
         if (addBooksRow.style.display === "none") {
-            addBooksRow.style.display = "block";
+            addBooksRow.style.display = "flex";
           } else {
             addBooksRow.style.display = "none";
           }
     });
 
     // When form submitted
-    document.getElementById("myForm").addEventListener("submit", function(event) {
+    document.getElementById("addBooksRow").addEventListener("submit", function(event) {
         event.preventDefault(); // Prevent the default form submission
           
         addNewBookToLibrary();

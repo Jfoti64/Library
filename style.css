@@ -1,18 +1,45 @@
+body {
+    background-color: aliceblue;
+    margin: 0px;
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 100px 150px minmax(300px, 1fr) 50px;
+    grid-template-rows: 37px auto minmax(300px, 1fr) 50px;
+    row-gap: 25px;
   }
   
 #header {
-    background-color: lightgray;
     display: grid;
 }
   
+#header h1 {
+    place-self: center;
+    margin: 0px;
+}
+
+#addBookBtnRow {
+    display: grid;
+}
+
 #addBooksRow {
-    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 400px;
+    justify-self: center;
+    text-align: center;
+    gap: 5px;
 }
   
+#showAddBookForm {
+    place-self: center;
+    height: 40px;
+    border-radius: 5px;
+    width: 150px;
+}
+
 #cards {
     display: grid;
     column-gap: 150px;
@@ -54,15 +81,12 @@
 
 .author > h3 {
     margin-top: 5px;
+    text-align: center;
 }
 
 .bookCard > button {
     border-radius: 5px;
     width: 80px;
     height: 40px;
-    place-self: center;
-}
-
-#header h1 {
     place-self: center;
 }
