@@ -19,6 +19,11 @@ body {
     margin: 0px;
 }
 
+.title h2 {
+    text-align: center;
+    padding: 0px 6px;
+}
+
 #addBookBtnRow {
     display: grid;
 }

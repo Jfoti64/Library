@@ -20,6 +20,18 @@ document.addEventListener('DOMContentLoaded', function() {
             pages: '448',
             readOrNot: 'Read',
         },
+        {
+            title: 'The Demon-Haunted World',
+            author: 'Carl Sagan',
+            pages: '459',
+            readOrNot: 'Read',
+        },
+        {
+            title: "I'm Thinking of Ending Things",
+            author: 'Iain Reid',
+            pages: '241',
+            readOrNot: 'Read',
+        },
     ];
 
     function book(title, author, pages, readOrNot) {
