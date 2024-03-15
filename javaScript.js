@@ -52,14 +52,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Delete book from card and array
-    function removeBook(dataIndex) {
-        // Delete all cards
+    // Delete all cards
+    function deleteAllCards() {
         const bookCards = document.querySelectorAll('.bookCard');
         bookCards.forEach(card => card.remove());
+    }
+
+    // Delete book from card and array
+    function removeBook(dataIndex) {
+        deleteAllCards();
 
         myLibrary.splice(dataIndex, 1);
         upDateCardsFromArray();
+    }
+
+    // Flip current readOrNotRead status
+    function changeReadStatus(dataIndex) {
+        let currentReadStatus = myLibrary[dataIndex].readOrNot;
+
+         if (currentReadStatus == 'Read') {
+            myLibrary[dataIndex].readOrNot = 'Unread';
+         }
+         else {
+            myLibrary[dataIndex].readOrNot = 'Read';
+         }
+         deleteAllCards();
+         upDateCardsFromArray();
     }
 
     // Add an event listener to each removeBtn as it is created
@@ -70,6 +88,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const dataIndex = bookCardDivToRemove.getAttribute('data-index');
 
             removeBook(dataIndex);
+        });
+    }
+
+    // Add an event listener to each changeReadBtn as it is created
+    function addEventListenerReadBtn(changeReadBtn) {
+        changeReadBtn.addEventListener('click', () => {
+            const clickedChangeReadBtn = event.target;
+            const bookCardDivToChange = clickedChangeReadBtn.closest('.bookCard');
+            const dataIndex = bookCardDivToChange.getAttribute('data-index');
+
+            changeReadStatus(dataIndex);
         });
     }
 
@@ -130,9 +159,11 @@ document.addEventListener('DOMContentLoaded', function() {
         addEventListenerBtn(removeBtn);
         
 
-        const cardBtn2 = document.createElement("button");
-        cardBtn2.textContent = "Read";
-        bookCardDiv.appendChild(cardBtn2);
+        const changeReadBtn = document.createElement("button");
+        changeReadBtn.textContent = "Read";
+        changeReadBtn.classList.add("changeReadBtn");
+        bookCardDiv.appendChild(changeReadBtn);
+        addEventListenerReadBtn(changeReadBtn);
         
 
         cards.insertBefore(bookCardDiv, cards.lastChild);
