@@ -17,6 +17,15 @@ document.addEventListener('DOMContentLoaded', function() {
     class Library {
         static books = [];
 
+        // Add pre-defined books
+        static initializeLibrary() {
+            const book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 218, "Read");
+            const book2 = new Book("To Kill a Mockingbird", "Harper Lee", 281, "Unread");
+            const book3 = new Book("1984", "George Orwell", 328, "Read");
+
+            this.books.push(book1, book2, book3);
+        }
+
         static addBook(book) {
             this.books.push(book);
         }
@@ -199,5 +208,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners within each class
     BookInput.addEventListenerShowAddBookForm();
     BookInput.addEventListenerAddBooksRow();
+
+    Library.initializeLibrary()
+    BookDOMRenderer.reRenderBooks();
 
 });    
