@@ -28,11 +28,12 @@ document.addEventListener('DOMContentLoaded', function() {
         static reverseReadStatus(book) {
             let currentReadStatus = book.readOrNot;
             if (currentReadStatus == 'Read') {
-                book.setReadOrNot('Unread');
+                book.setReadOrNot = 'Unread';
             }
             else {
-                book.setReadOrNot('Read');
+                book.setReadOrNot = 'Read';
             }
+            BookDOMRenderer.reRenderBooks();
         }
         
         static deleteAllCards() {
@@ -41,15 +42,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         static updateBooksIndex() {
-            this.books.forEach((book, idx) => {
+            Library.books.forEach((book, idx) => {
                 book.index = idx;
             });
         }
 
         static removeBook(dataIndex) {
-            this.deleteAllCards();
+            Library.deleteAllCards();
     
-            this.books.splice(dataIndex, 1);
+            Library.books.splice(dataIndex, 1);
             BookDOMRenderer.upDateCardsFromArray();
         }
 
@@ -58,16 +59,17 @@ document.addEventListener('DOMContentLoaded', function() {
     class BookDOMRenderer {
         static addEventListenerReadBtn(changeReadBtn) {
             changeReadBtn.addEventListener('click', (event) => {
-               BookDOMRenderer.handleChangeReadBtnClick(event);
+                const clickedChangeReadBtn = event.target;
+                BookDOMRenderer.handleChangeReadBtnClick(clickedChangeReadBtn);
             });
         }
 
-        static handleChangeReadBtnClick(event) {
-            const clickedChangeReadBtn = event.target;
+        static handleChangeReadBtnClick(clickedChangeReadBtn) {
             const bookCardDivToChange = clickedChangeReadBtn.closest('.bookCard');
             const dataIndex = bookCardDivToChange.getAttribute('data-index');
 
             Library.reverseReadStatus(Library.getLibrary()[dataIndex]);
+            console.log(Library.getLibrary());
         }
 
         static addEventListenerRmvBtn(removeBtn) {
@@ -90,12 +92,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         static upDateCardsFromArray() {
+            Library.updateBooksIndex();
             Library.getLibrary().forEach(obj => {
-                Library.updateBooksIndex();
-                BookDOMRenderer.createNewCard(obj.title, obj.author, obj.pages, obj.readOrNot, obj.index);
+                BookDOMRenderer.createNewCard(obj);
             });
-            BookDOMRenderer.reRenderBooks();
         }
+        
 
         static createNewCard(newBook) {
             const bookCardDiv = document.createElement("div");
@@ -165,6 +167,8 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 BookInput.addBooksRow.style.display = "none";
             }
+            // Testing
+            console.log(Library.getLibrary());
         }
     
         static addEventListenerAddBooksRow() {
@@ -180,8 +184,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
         static addNewBookObj() {
             const readOrNot = document.getElementById('read').checked ? document.getElementById('read').value : document.getElementById('unread').value;
-            console.log(readOrNot);
-            console.log(BookInput.authorInput.value);
 
             if (BookInput.titleInput.value && BookInput.authorInput.value && BookInput.pagesInput.value && readOrNot) {
                 const newBook = new Book(BookInput.titleInput.value, BookInput.authorInput.value, BookInput.pagesInput.value, readOrNot);
@@ -199,5 +201,3 @@ document.addEventListener('DOMContentLoaded', function() {
     BookInput.addEventListenerAddBooksRow();
 
 });    
-
-    
